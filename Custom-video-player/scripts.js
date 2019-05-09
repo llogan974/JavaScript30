@@ -18,6 +18,13 @@ function togglePlay(){
             video.pause();
         }
     }
+function updateButton(){
+    console.log('Update that button');
+}
 
 video.addEventListener('click', togglePlay);
-toggle.addEventListener('click', togglePlay);
+video.addEventListener('play', togglePlay);
+video.addEventListener('pause', togglePlay);
+
+
+toggle.addEventListener('click', togglePlay)
