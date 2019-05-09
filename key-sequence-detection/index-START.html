@@ -6,15 +6,24 @@
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+  <div id="luke-secret-code">
+    Enter the secret Code. 
+  </div>
 <script>
 
+const bodyStyle = document.querySelector('#luke-secret-code');
 const pressed = [];
 const secretCode = 'lukelogan';
   window.addEventListener('keyup', (e) => {
     console.log(e.key);
     pressed.push(e.key);
-    pressed.splice(-secretCode.length -1);
+    pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
     console.log(pressed);
+
+    if(pressed.join('').includes(secretCode)){
+      // bodyStyle.cssText = 'background-image: url("https://picsum.photos/id/645/800/500?blur=5");';
+cornify_add();
+    }
   })
 </script>
 </body>
