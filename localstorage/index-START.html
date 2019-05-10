@@ -30,6 +30,15 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+function addItem(e){
+  e.preventDefault();
+  console.log('Item added!');
+}
+
+// This covers submit by pressing "enter"
+
+  addItems.addEventListener('submit', addItem);
+
 </script>
 
 
