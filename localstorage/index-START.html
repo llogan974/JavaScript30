@@ -37,7 +37,16 @@ function addItem(e){
     text,
     done: false
   };
-  console.log(item);
+  items.push(item);
+  this.reset();
+}
+
+function populateList( plates = [], platesList){
+  platesList.innerHTML = plates.map((plate, i) => {
+    return `
+
+    `;
+  })
 }
 
 // This covers submit by pressing "enter"
