@@ -41,10 +41,18 @@ function addItem(e){
   this.reset();
 }
 
+// Add a function that doesnt use external variabled. It passes in
+// Brand new variables
 function populateList( plates = [], platesList){
   platesList.innerHTML = plates.map((plate, i) => {
+    /*
+    Loop over all items in an array, and MAP (or create a new 
+    copy of the array items) and return another array of that data. 
+    */
     return `
-
+    <li>
+       <label for="">${plate.text}</label>
+    </li>
     `;
   })
 }
@@ -57,5 +65,6 @@ function populateList( plates = [], platesList){
 
 
 </body>
+
 </html>
 
