@@ -32,7 +32,12 @@
 
 function addItem(e){
   e.preventDefault();
-  console.log('Item added!');
+  const text = (this.querySelector('[name=item')).value;
+  const item = {
+    text,
+    done: false
+  };
+  console.log(item);
 }
 
 // This covers submit by pressing "enter"
