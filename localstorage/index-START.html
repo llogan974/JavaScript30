@@ -71,8 +71,16 @@ function populateList( plates = [], platesList){
 }
 
 // This covers submit by pressing "enter"
+function toggleDone(e){
+  // Skip this function if the right thing is not clicked. 
+  if(!e.target.matches('input')) return;
+  console.log(e.target);
+}
 
-  addItems.addEventListener('submit', addItem);
+addItems.addEventListener('submit', addItem);
+// WHen an item is added, it is loaded into local storage. If there are no items in local storage, it falls back to an empty array. 
+
+itemsList.addEventListener('click', toggleDone );
 
 populateList(items, itemsList);
 </script>
