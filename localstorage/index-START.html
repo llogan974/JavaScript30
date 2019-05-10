@@ -74,7 +74,14 @@ function populateList( plates = [], platesList){
 function toggleDone(e){
   // Skip this function if the right thing is not clicked. 
   if(!e.target.matches('input')) return;
-  console.log(e.target);
+  const el = e.target;
+  // Create an array of items to reference for "checked" property
+  const index = el.dataset.index;
+  // Toggle the "done" category. 
+  items[index].done = !items[index].done;
+  localStorage.setItem('items', JSON.stringify(items));
+  populateList(items, itemsList);
+
 }
 
 addItems.addEventListener('submit', addItem);
