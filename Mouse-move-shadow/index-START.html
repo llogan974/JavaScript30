@@ -35,6 +35,35 @@
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = document.querySelector('h1');
+  const walk = 100; 
+
+
+// Get width and height of what we hover over
+  function shadow(e){
+    const width = hero.offsetWidth;
+    const height = hero.offsetHeight;
+
+
+    // Where was the cursor?
+    // OffestX = x, offsetY = y; this is taken from the event
+    let { offsetX: x, offsetY: y } = e;
+
+    // THIS is div "hero", and the listener; e.target is what it triggered on. 
+    if(this !== e.target) {
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+
+    // Sets the min and max of 50
+    const xWalk = ((x / width * walk) - (walk / 2));
+    const yWalk = ((y / height * walk) - (walk / 2));
+
+    console.log(xWalk, yWalk);
+  }
+
+  hero.addEventListener('mousemove', shadow);
 </script>
 </body>
 </html>
