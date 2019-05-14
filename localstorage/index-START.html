@@ -35,7 +35,7 @@
 
 function addItem(e){
   e.preventDefault();
-  const text = (this.querySelector('[name=item')).value;
+  const text = (this.querySelector('[name=item]')).value;
   const item = {
     text,
     done: false
@@ -89,7 +89,6 @@ addItems.addEventListener('submit', addItem);
 
 itemsList.addEventListener('click', toggleDone );
 
-populateList(items, itemsList);
 </script>
 
 

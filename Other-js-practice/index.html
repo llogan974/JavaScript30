@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    function helloWorld(){
+        console.log("Hello WOrld");
+        console.log(this);
+    }
+    helloWorld();
+
+    var Greensboro = {
+        highschools: 15,
+        airport: 1,
+        colleges: 5,
+        logNumberOfColleges: function() {
+            console.log("There are " + this.bridges + " in Greensboro!");
+        }
+    }
+    console.log(Greensboro);
+
+</script>
+</html>
