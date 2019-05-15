@@ -198,8 +198,34 @@
             return (mins * 60) + secs;
             console.log(mins, secs);
         })
+        // Old method:
+        // .reduce((total, seconds) => {
+        //     return total + seconds;
+        // })
 
-console.log(timeNodes);
+        // Same as this:
+        .reduce((total, vidSeconds) => total + vidSeconds);
+
+        // How many seconds are left?
+        // Use "Let" because the value can be reassigned. 
+        let secondsLeft = seconds;
+
+        // const hours = secondsLeft / 3600;
+        // Returns "4.98....". We want "4"
+
+        // So we change it to:
+        const hours = Math.floor(secondsLeft / 3600);
+
+        // How to get seconds left? use "MOD!"
+        secondsLeft = secondsLeft % 3600;
+
+        // What about Minutes?
+        const mins = Math.floor(secondsLeft / 60);
+        secondsLeft = secondsLeft % 60;
+
+        console.log(hours, mins, secondsLeft);
+
+
 </script>
 </body>
 </html>
