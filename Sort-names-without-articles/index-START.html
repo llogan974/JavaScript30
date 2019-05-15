@@ -64,10 +64,18 @@ function strip(bandName) {
 //     return -1;
 //   }
 // })
+
 // New method (same thing as commented out above)
+// Set the VARIABLE as a function. 
  const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
 
-console.log(sortedBands);
+// Take element's inner HTML, sets it as B, sorted bands, map over each of those, which returns and array via map. THEN, join it. 
+ document.querySelector('#bands').innerHTML =
+  // Take the variable (which is a function from above). Create a new array ".map" and store the HTML in SORTEDBANDS
+  sortedBands.map(band => `<li>${band}</li>`)
+  // This needs to be used before returning to innerHTML.
+  .join('');
+
 
 </script>
 
