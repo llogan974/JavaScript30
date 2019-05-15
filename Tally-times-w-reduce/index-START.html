@@ -182,6 +182,24 @@
     </li>
   </ul>
 <script>
+    // This will return a NODE LIST
+    // const timeNodes = document.querySelectorAll('[data-time');
+
+    // This will return an ARRAY
+    const timeNodes = Array.from(document.querySelectorAll('[data-time'));
+
+    const seconds = timeNodes
+        .map(node => node.dataset.time)
+        .map(timeCode => {
+            // Split on : with .split
+            // Createa  new array of integers w parseFloat
+            const [mins, secs] = timeCode.split(':').map(parseFloat);
+            // Multiply Minutes times 60 to get minutes
+            return (mins * 60) + secs;
+            console.log(mins, secs);
+        })
+
+console.log(timeNodes);
 </script>
 </body>
 </html>
