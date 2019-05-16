@@ -183,7 +183,14 @@
   </ul>
 <script>
     // This will return a NODE LIST
-    // const timeNodes = document.querySelectorAll('[data-time');
+    const newNodes = document.querySelectorAll('[data-time');
+    // Get the time in each node. 
+    // Loop over with "foreach", and get dataset
+    newNodes.forEach(element => {
+        var liTime = element.dataset.time;
+        var spanNode = document.createElement("span");
+        element.appendChild(spanNode).innerHTML = "</br>" + liTime;
+    });
 
     // This will return an ARRAY
     const timeNodes = Array.from(document.querySelectorAll('[data-time'));
@@ -221,6 +228,7 @@
 
         // What about Minutes?
         const mins = Math.floor(secondsLeft / 60);
+
         secondsLeft = secondsLeft % 60;
 
         console.log(hours, mins, secondsLeft);
