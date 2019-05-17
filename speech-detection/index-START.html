@@ -12,6 +12,18 @@
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+  // This allows live transcription. If it was false, you would have to wait until done speaking to see the results. 
+  recognition.interimResults = true;
+
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+  recognition.addEventListener('results', e => {
+    console.log(e);
+  })
+
 
 </script>
 
