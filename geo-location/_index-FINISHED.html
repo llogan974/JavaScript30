@@ -13,6 +13,7 @@
     <span class="speed-value">0</span>
     <span class="units">KM/H</span>
   </h1>
+
   <style>
     html {
       font-size: 100px;
@@ -58,16 +59,15 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
-
-
     const arrow = document.querySelector('.arrow');
     const speed = document.querySelector('.speed-value');
 
-    // getPosition is a one time entry of position data; watchPosition will watch position over time. 
     navigator.geolocation.watchPosition((data) => {
       console.log(data);
       speed.textContent = data.coords.speed;
       arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      console.error(err);
     });
   </script>
 </body>
