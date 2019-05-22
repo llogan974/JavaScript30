@@ -236,14 +236,44 @@ SO you must use a transition, stepping class like the next two lines of CSS
   function handleEnter(){
     this.classList.add('trigger-enter');
     // Add a function to include the transition. 
-    setTimeout(() => this.classList.add('trigger-enter-active'), 150);
+    setTimeout(() => {
+      // If the mouse is moving really quick, it might cause an error. 
+      if(this.classList.contains('trigger-enter')) {
+        // A class should only be added IF it contains 'trigger-enter'
+        this.classList.add('trigger-enter-active')
+      }
+    }, 150);
+    // We need to use JS because the white background size will change
+    background.classList.add('open');
+
+    const dropdown = this.querySelector('.dropdown')
+
+    // You can get the coordinates of these items with this built in JS method
+    const dropdownCoords = dropdown.getBoundingClientRect();
+    const navCoords = nav.getBoundingClientRect();
+
+    // Store the coordinates of each LI
+    const coords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width,
+
+      // Offset the top and left by the Nav bar
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left,
+    };
+    // Adjust the coords to the width and height of the LI
+    background.style.setProperty('width', `${coords.width}px`);
+    background.style.setProperty('height', `${coords.height}px`);
+    background.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px )`);
+
+
+
   }
 
-
+  // Create a function for when the mouse leaves the block
   function handleLeave(){
     this.classList.remove('trigger-enter', 'trigger-enter-active');
-
-    console.log('Leave');
+    background.classList.remove('open');
 
   }
 
