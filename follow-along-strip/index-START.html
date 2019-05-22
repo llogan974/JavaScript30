@@ -143,7 +143,12 @@
     will-change: opacity;
     display: none;
   }
+/* From above, you cannot make both changes at the same time 
+opacity 0 -> opacity 1, 
+display none -> display block
 
+SO you must use a transition, stepping class like the next two lines of CSS
+ */
   .trigger-enter .dropdown {
     display: block;
   }
@@ -226,11 +231,18 @@
   const background = document.querySelector('.dropdownBackground');
   const nav = document.querySelector('.top');
 
+  // Objective: show the contents when hovered. Do this by adding and removing classes
+
   function handleEnter(){
-    console.log('Enter');
+    this.classList.add('trigger-enter');
+    // Add a function to include the transition. 
+    setTimeout(() => this.classList.add('trigger-enter-active'), 150);
   }
 
+
   function handleLeave(){
+    this.classList.remove('trigger-enter', 'trigger-enter-active');
+
     console.log('Leave');
 
   }
