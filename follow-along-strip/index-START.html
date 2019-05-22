@@ -7,11 +7,13 @@
 <body>
   <h2>Cool</h2>
   <nav class="top">
+    <!-- The Nav dropdown is only one div -->
     <div class="dropdownBackground">
       <span class="arrow"></span>
     </div>
 
     <ul class="cool">
+      <!-- LI is what we will hover over, it will be the listener -->
       <li>
         <a href="#">About Me</a>
         <div class="dropdown dropdown1">
@@ -220,6 +222,22 @@
 </style>
 
 <script>
+  const triggers = document.querySelectorAll('.cool > li');
+  const background = document.querySelector('.dropdownBackground');
+  const nav = document.querySelector('.top');
+
+  function handleEnter(){
+    console.log('Enter');
+  }
+
+  function handleLeave(){
+    console.log('Enter');
+
+  }
+
+  triggers.forEach(trigger.addEventListener('mouseenter', handleEnter));
+  triggers.forEach(trigger.addEventListener('mouseleave', handleLeave));
+
 </script>
 
 </body>
