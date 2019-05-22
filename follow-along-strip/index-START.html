@@ -231,12 +231,12 @@
   }
 
   function handleLeave(){
-    console.log('Enter');
+    console.log('Leave');
 
   }
 
-  triggers.forEach(trigger.addEventListener('mouseenter', handleEnter));
-  triggers.forEach(trigger.addEventListener('mouseleave', handleLeave));
+  triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+  triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
 
 </script>
 
