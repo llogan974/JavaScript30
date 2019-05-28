@@ -26,26 +26,25 @@ body {
   grid-template-columns: 200px 200px;
 }
 
-.grid-seconds {
+.grid-minutes {
   font-weight: 100;
   font-size: 20rem;
   font-size: 100px; 
-  
-  
 }
 
-.grid-minutes {
+.grid-seconds {
     font-weight: 100;
   font-size: 20rem; 
-    transform: none;
-  transition-duration: 200ms; 
+    /* transform: none; */
+  transition-delay: 1000ms;
+  transition-duration: 100ms; 
   font-size: 100px; 
 }
 
-.grid-minutes-transition {
+.grid-seconds-transition {
         transform-origin: left bottom;
       transform: rotateX(90deg);
-      transition-duration: 200ms;
+      transition-duration: 100ms;
       transition-timing-function: cubic-bezier(0.55, 1.6, 0.08, 1.23);  
 }
 .timer {

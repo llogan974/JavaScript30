@@ -2,6 +2,10 @@
 let countdown;
 
 const timerDisplay = document.querySelector('.display__time-left');
+
+const minuteDisplay = document.querySelector('.grid-minutes');
+const secondDisplay = document.querySelector('.grid-seconds');
+
 const endTime = document.querySelector('.display__end-time');
 
 // Get all data-keys with built-in timer settings
@@ -10,9 +14,9 @@ const buttons = document.querySelectorAll('[data-time');
 
 // This is our main function
 function timer(seconds) {
-    //If any timers are already going, clear them
-    clearInterval(countdown);
 
+    //If any timers are already going, clear them
+    clearInterval(countdown);    
 
     // Date.now is a new JS function, will give time in MS.
     const now = Date.now();
@@ -28,6 +32,8 @@ function timer(seconds) {
 
     // Set this function to the variable that lives in the browser. Set interval is a function that runs every 1000 ms 
     countdown = setInterval(() => {
+      currentDisplay();
+
         const secondsLeft = Math.round((then - Date.now()) / 1000);
       
         // Check when timer is done. 
@@ -36,10 +42,9 @@ function timer(seconds) {
             return;
         }
       
-
         //display it
         displayTimeLeft(secondsLeft);
-      
+
 // Run this function every 1000 ms
     }, 1000);
 }
@@ -55,11 +60,19 @@ function displayTimeLeft(seconds) {
     const remainderSeconds = seconds % 60;
 
     // Check if display needs a leading 0, if there is less than 10 seconds. so, '9' will display as '09'
-    const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+    const minDisplay = `${minutes}`;
+  
+  const secDisplay = `:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+    
+    
+
 
     //Change title of document to be the seconds left
-    document.title = display;
-    timerDisplay.textContent = display;
+    // document.title = display;
+  
+  minuteDisplay.textContent = minDisplay;
+  secondDisplay.textContent = secDisplay;
+  
 
 }
 
@@ -106,18 +119,13 @@ document.customForm.addEventListener('submit', function(e){
 })
 
 
-function addTransform(){
 
-    timerDisplay.style.transition = "transform 1s";
-};
 
-function removeTransform(){
-    timerDisplay.style.transition = "";
+
+function currentDisplay(){
+  secondDisplay.classList.toggle("grid-seconds-transition");
 
 }
-
-
-
 
 /*
 todo/ ideas to enhance this timer: 
@@ -125,5 +133,6 @@ add timer sound when timer ends
 
 add transitions to the countdown. 
 
-*/
+add a "pause" button
 
+*/
