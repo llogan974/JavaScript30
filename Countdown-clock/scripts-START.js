@@ -1,42 +1,58 @@
-// Create the universal variable that lives in the window. 
+// Create the universal variable 'countdown' that lives in the window. 
 let countdown;
+
 const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');
 
+// Get all data-keys with built-in timer settings
+const buttons = document.querySelectorAll('[data-time');
 
+
+// This is our main function
 function timer(seconds) {
-    // Date.now is a new function, will give time in MS.
+    //If any timers are already going, clear them
+    clearInterval(countdown);
+
+    // Date.now is a new JS function, will give time in MS.
     const now = Date.now();
 
-    // Find time in SECONDS by multiplying by 1000
+    // Find time in SECONDS by multiplying default MS by 1000
     const then = now + seconds * 1000;
 
-    // Run another function as soon as this function is invoked
+    // Run another function, defined below, as soon as this function is invoked
     displayTimeLeft(seconds);
 
-    // Show the end time, another function below. 
+    // Show the end time, another function defined below. 
     displayEndTime(then);
 
-    // Set this function to the variable that lives int he browser. 
+    // Set this function to the variable that lives in the browser. Set interval is a function that runs every 1000 ms 
     countdown = setInterval(() => {
         const secondsLeft = Math.round((then - Date.now()) / 1000);
-        // Check when it is done. 
+      
+        // Check when timer is done. 
         if(secondsLeft < 0){
             clearInterval(countdown);
             return;
         }
+      
         //display it
         displayTimeLeft(secondsLeft);
-
+      
+      
+// Run this function every 1000 ms
     }, 1000);
 }
 
-// Timer defaults to skipping first second. This function adds in the first second. 
+
+//Convert seconds to the formatted display value
 function displayTimeLeft(seconds) {
+
     // Round seconds to whole numbers
     const minutes = Math.floor(seconds / 60);
+
     // Get the number of whole seconds remaining
     const remainderSeconds = seconds % 60;
+
     // Check if display needs a leading 0, if there is less than 10 seconds. so, '9' will display as '09'
     const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
 
@@ -44,11 +60,12 @@ function displayTimeLeft(seconds) {
     document.title = display;
     timerDisplay.textContent = display;
 
-    console.log({minutes, remainderSeconds});
 }
 
+// Show the static, unchanging END time
 function displayEndTime(timestamp) {
-    // Pass in the timestamp, which has all of the info below built in
+  
+    // Pass in the timestamp, which has all of the info below built in. This is a default JS method
     const end = new Date(timestamp);
 
     // Extract hours and minutes from the timestamp
@@ -60,3 +77,38 @@ function displayEndTime(timestamp) {
     // Check if less than 10 minutes. '9' becomes '09'
     endTime.textContent = `Be Back at ${hour > 12 ? hour - 12 : hour}:${minutes < 10 ? '0' : ''}${minutes}`;
 }
+
+// Get data from the data attribute buttons, and set them as the timer
+function startTimer(){
+
+    // ParseInt to only get whole number
+    const seconds = parseInt(this.dataset.time);
+    timer(seconds);
+}
+
+// Function to get data from pre-set button in data attributes
+buttons.forEach(button => button.addEventListener('click', startTimer));
+
+// If you give your form a custom name (name="minutes" in our HTML in this case), you can select it this way
+document.customForm.addEventListener('submit', function(e){
+
+    //prevent default browser behavior of reloading the page on time form submit
+    e.preventDefault();
+
+    //Get the number of minutes from the input field
+    const mins = this.minutes.value;
+
+    // Convert the minutes to seconds, which is what our timer uses
+    timer(mins * 60);
+    this.reset();
+
+})
+
+
+/*
+todo/ ideas to enhance this timer: 
+add timer sound when timer ends
+
+add transitions to the countdown. 
+
+*/
