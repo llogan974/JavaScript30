@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Whack A Mole!</title>
-  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <!-- <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'> -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,9 +33,72 @@
   </div>
 
 <script>
+  // Select the holes, create scoreboard, etc. 
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  let lastHole;
+  let timeUp = false;
+  let score = 0;
+
+  // Pick a random time
+  function randTime(min, max) {
+    return Math.round(Math.random() * (max - min) + min) 
+  }
+
+  // Pick a random hole (or any dom element)
+  function randomHole(holes) {
+
+    const idx = Math.floor(Math.random() * holes.length);
+    const hole = holes[idx];
+
+    // Make sure the whole is not selected twice in a row
+    if( hole === lastHole){
+      console.log('Nope, that is the same hole!');
+      return randomHole(holes);
+    }
+    lastHole = hole;
+    return hole;
+  }
+
+  // Make the mole pop up
+  function peep(){
+    const time = randTime(200, 1000);
+    const hole = randomHole(holes);
+    hole.classList.add('up');
+
+    // Make the popup repeat itself
+    setTimeout(() => {
+      hole.classList.remove('up');
+      if(!timeUp) peep();
+    }, time);
+  }
+
+  // Start tje game
+  function startGame(){
+    scoreBoard.textContent = 0;
+    timeUp = false;
+    score = 0;
+    peep();
+
+    // Make the game run for 10 secodns
+    setTimeout(() => timeUp = true, 10000)
+  }
+
+  // Each time you bop the mole
+  function bonk(e) {
+
+    // Make sure it is not a bot clicking
+    if(!e.isTrusted) return;
+    score++;
+    this.classList.remove('up');
+
+    // Update score when successful
+    scoreBoard.textContent = score;
+  }
+
+  // Listen for a whack
+  moles.forEach(mole => mole.addEventListener('click', bonk));
 
 </script>
 </body>
